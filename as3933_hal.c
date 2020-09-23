@@ -136,10 +136,11 @@ esp_err_t as3933_w_up_intr_init(gpio_num_t w_up_gpio, w_up_callback_t cb)
     gpio_config_t gpio_in_conf =
 	{
 		.mode = GPIO_MODE_INPUT,
-		.intr_type = GPIO_INTR_ANYEDGE,
+		.intr_type = GPIO_INTR_POSEDGE,
 		.pin_bit_mask = (1ULL << w_up_gpio),
 		.pull_down_en = GPIO_PULLDOWN_ENABLE,
-		.pull_up_en = GPIO_PULLUP_DISABLE, };
+		.pull_up_en = GPIO_PULLUP_DISABLE,
+	};
 
     esp_err_t ret = gpio_config(&gpio_in_conf);
     CHECK(ret == ESP_OK, ret, "GPIO %d CONFIG FAIL", w_up_gpio);
